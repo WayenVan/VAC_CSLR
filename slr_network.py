@@ -81,7 +81,8 @@ class SLRModel(nn.Module):
             # videos
             batch, temp, channel, height, width = x.shape
             inputs = x.reshape(batch * temp, channel, height, width)
-            framewise = self.masked_bn(inputs, len_x)
+            # framewise = self.masked_bn(inputs, len_x)
+            framewise = self.conv2d(inputs)
             framewise = framewise.reshape(batch, temp, -1).transpose(1, 2)
         else:
             # frame-wise features

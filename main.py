@@ -1,5 +1,5 @@
 import os
-
+import pickle
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 import pdb
 import sys
@@ -167,6 +167,9 @@ class Processor():
             arg["transform_mode"] = train_flag
             self.dataset[mode] = self.feeder(gloss_dict=self.gloss_dict, **arg)
             self.data_loader[mode] = self.build_dataloader(self.dataset[mode], mode, train_flag)
+
+            # with open('test/dataset.pt', 'wb') as f:
+            #     pickle.dump(self.dataset, f)
         print("Loading data finished.")
 
     def build_dataloader(self, dataset, mode, train_flag):
