@@ -1,5 +1,5 @@
 work_dir
-.test
+.test/dataset.pt
 preprocess/phoenix2014
 .vscode
 dataset/phoenix2014
