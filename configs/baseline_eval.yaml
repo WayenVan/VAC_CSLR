@@ -1,9 +1,9 @@
 feeder: dataset.dataloader_video.BaseFeeder
-phase: train
+phase: test
 dataset: phoenix14
 # dataset: phoenix14-si5
 num_epoch: 40
-work_dir: ./work_dir/baseline_res18v2/
+work_dir: ./work_dir/eval/
 batch_size: 2
 random_seed: 0
 test_batch_size: 8
@@ -12,14 +12,14 @@ device: 0
 log_interval: 50
 eval_interval: 1
 save_interval: 5
-# python in default
+# python in defaultg
 evaluate_tool: python
-loss_weights:
+loss_weights: 
   SeqCTC: 1.0
   # VAC
   # ConvCTC: 1.0
   # Dist: 10.0
-#load_weights: ''
+load_weights: 'work_dir/baseline_res18/dev_100.00_epoch25_model.pt'
 
 optimizer_args:
   optimizer: Adam

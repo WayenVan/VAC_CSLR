@@ -3,7 +3,7 @@ import pdb
 import copy
 import numpy as np
 from itertools import groupby
-
+import os
 
 # Reference: https://github.com/ustc-slr/DilatedSLR/blob/master/lib/lib_metric.py
 # More about ASR evaluation: https://www.nist.gov/system/files/documents/2021/08/03/OpenASR20_EvalPlan_v1_5.pdf
@@ -40,12 +40,12 @@ def get_wer_delsubins(ref, hyp, merge_same=False, align_results=False,
     ref_lgt = len(ref) + 1
     hyp_lgt = len(hyp) + 1
 
-    costs = np.ones((ref_lgt, hyp_lgt), dtype=np.int) * 1e6
+    costs = np.ones((ref_lgt, hyp_lgt), dtype=np.int32) * 1e6
     # auxiliary values
     costs[0, :] = np.arange(hyp_lgt) * penalty['ins']
     costs[:, 0] = np.arange(ref_lgt) * penalty['del']
 
-    backtrace = np.zeros((ref_lgt, hyp_lgt), dtype=np.int)
+    backtrace = np.zeros((ref_lgt, hyp_lgt), dtype=np.int32)
     # auxiliary indexes, 0, 1, 2, 3 are corresponding to correct, substitute, insert and delete, respectively
     backtrace[0, :] = 2
     backtrace[:, 0] = 3
@@ -225,6 +225,7 @@ def wer_calculation(gt_path, primary_pred, auxiliary_pred=None):
 
 
 if __name__ == '__main__':
+    os.chdir('/home/jingyan/Documents/VAC_CSLR/evaluation/slr_eval')
     wer_calculation('phoenix2014-groundtruth-dev.stm',
                     'out.output-hypothesis-dev.ctm')
     #                     'out.output-hypothesis-dev-conv.ctm')

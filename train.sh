@@ -1,4 +1,4 @@
 #! /usr/bin/sh
 
-python3 ./main.py --work-dir work_directory --config configs/baseline.yaml --device 0
+python3 ./main.py --config configs/baseline.yaml
 
